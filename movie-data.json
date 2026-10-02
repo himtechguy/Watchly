@@ -1,0 +1,9 @@
+{
+  id: "night-of-the-living-dead",
+  title: "Night of the Living Dead",
+  year: 1968,
+  genre: "Horror",
+  poster: "https://upload.wikimedia.org/wikipedia/commons/1/1e/Night_of_the_Living_Dead_%281968%29.webm",
+  description: "A group of survivors barricade themselves inside a farmhouse while the dead rise around them.",
+  video: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Night_of_the_Living_Dead_(1968).webm"
+}
