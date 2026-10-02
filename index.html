@@ -143,8 +143,19 @@
 </section>
 
 <footer>
-  © 2026 Watchly
+  © 2026 Watchly tarkue made it❤️
 </footer>
 
-</body>
+</body><script> 
+document.querySelectorAll('a').forEach(function(link) {
+  const text = link.textContent.toLowerCase();
+
+  if (
+    text.includes('watch') ||
+    text.includes('play')
+  ) {
+    link.href = 'player.html';
+  }
+});
+</script>
   </html>
