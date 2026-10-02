@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Watchly — Movies</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #070707;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  background: #111;
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  font-size: 25px;
+  font-weight: 900;
+}
+
+.search {
+  width: 230px;
+  padding: 11px 15px;
+  border-radius: 25px;
+  border: 1px solid #333;
+  background: #222;
+  color: white;
+  outline: none;
+}
+
+.container {
+  padding: 30px 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+h1 {
+  margin-bottom: 25px;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  margin-bottom: 30px;
+}
+
+.filter {
+  border: 0;
+  background: #1d1d1d;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 20px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.filter:hover,
+.filter.active {
+  background: #e50914;
+}
+
+.movies {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 18px;
+}
+
+.movie {
+  height: 250px;
+  border-radius: 9px;
+  overflow: hidden;
+  position: relative;
+  text-decoration: none;
+  color: white;
+
+  background:
+    linear-gradient(to top, rgba(0,0,0,.95), transparent 65%),
+    linear-gradient(145deg, #343434, #111);
+
+  transition: .2s;
+}
+
+.movie:hover {
+  transform: scale(1.04);
+}
+
+.movie-info {
+  position: absolute;
+  bottom: 0;
+  padding: 15px;
+}
+
+.movie-title {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.movie-meta {
+  color: #aaa;
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+.empty {
+  display: none;
+  text-align: center;
+  color: #777;
+  padding: 40px;
+}
+
+@media(max-width:600px) {
+  header {
+    gap: 12px;
+  }
+
+  .logo {
+    font-size: 21px;
+  }
+
+  .search {
+    width: 145px;
+  }
+
+  .movies {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .movie {
+    height: 220px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="logo">WATCHLY</div>
+
+  <input
+    id="search"
+    class="search"
+    placeholder="Search movies..."
+    type="search">
+
+</header>
+
+<main class="container">
+
+  <h1>🎬 Movies</h1>
+
+  <div class="filters">
+
+    <button class="filter active" data-genre="all">
+      All
+    </button>
+
+    <button class="filter" data-genre="action">
+      Action
+    </button>
+
+    <button class="filter" data-genre="comedy">
+      Comedy
+    </button>
+
+    <button class="filter" data-genre="horror">
+      Horror
+    </button>
+
+    <button class="filter" data-genre="romance">
+      Romance
+    </button>
+
+    <button class="filter" data-genre="drama">
+      Drama
+    </button>
+
+    <button class="filter" data-genre="african">
+      African
+    </button>
+
+  </div>
+
+  <div id="movies" class="movies">
+
+    <a
+      class="movie"
+      href="watch.html"
+      data-title="Movie One"
+      data-genre="action">
+
+      <div class="movie-info">
+
+        <div class="movie-title">
+          Movie One
+        </div>
+
+        <div class="movie-meta">
+          Action • 2026
+        </div>
+
+      </div>
+
+    </a>
+
+
+    <a
+      class="movie"
+      href="watch.html"
+      data-title="Movie Two"
+      data-genre="comedy">
+
+      <div class="movie-info">
+
+        <div class="movie-title">
+          Movie Two
+        </div>
+
+        <div class="movie-meta">
+          Comedy • 2026
+        </div>
+
+      </div>
+
+    </a>
+
+
+    <a
+      class="movie"
+      href="watch.html"
+      data-title="Movie Three"
+      data-genre="horror">
+
+      <div class="movie-info">
+
+        <div class="movie-title">
+          Movie Three
+        </div>
+
+        <div class="movie-meta">
+          Horror • 2026
+        </div>
+
+      </div>
+
+    </a>
+
+
+    <a
+      class="movie"
+      href="watch.html"
+      data-title="Movie Four"
+      data-genre="romance">
+
+      <div class="movie-info">
+
+        <div class="movie-title">
+          Movie Four
+        </div>
+
+        <div class="movie-meta">
+          Romance • 2026
+        </div>
+
+      </div>
+
+    </a>
+
+
+    <a
+      class="movie"
+      href="watch.html"
+      data-title="Movie Five"
+      data-genre="drama">
+
+      <div class="movie-info">
+
+        <div class="movie-title">
+          Movie Five
+        </div>
+
+        <div class="movie-meta">
+          Drama • 2026
+        </div>
+
+      </div>
+
+    </a>
+
+
+    <a
+      class="movie"
+      href="watch.html"
+      data-title="Movie Six"
+      data-genre="african">
+
+      <div class="movie-info">
+
+        <div class="movie-title">
+          Movie Six
+        </div>
+
+        <div class="movie-meta">
+          African • 2026
+        </div>
+
+      </div>
+
+    </a>
+
+  </div>
+
+  <div id="empty" class="empty">
+    No movies found.
+  </div>
+
+</main>
+
+<script>
+
+const search = document.getElementById("search");
+const cards = document.querySelectorAll(".movie");
+const filters = document.querySelectorAll(".filter");
+const empty = document.getElementById("empty");
+
+let selectedGenre = "all";
+
+function updateMovies() {
+
+  const query =
+    search.value.toLowerCase().trim();
+
+  let count = 0;
+
+  cards.forEach(card => {
+
+    const title =
+      card.dataset.title.toLowerCase();
+
+    const genre =
+      card.dataset.genre;
+
+    const matchesSearch =
+      title.includes(query);
+
+    const matchesGenre =
+      selectedGenre === "all" ||
+      genre === selectedGenre;
+
+    if (matchesSearch && matchesGenre) {
+
+      card.style.display = "";
+
+      count++;
+
+    } else {
+
+      card.style.display = "none";
+
+    }
+
+  });
+
+  empty.style.display =
+    count === 0 ? "block" : "none";
+}
+
+search.addEventListener(
+  "input",
+  updateMovies
+);
+
+filters.forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    filters.forEach(b =>
+      b.classList.remove("active")
+    );
+
+    button.classList.add("active");
+
+    selectedGenre =
+      button.dataset.genre;
+
+    updateMovies();
+
+  });
+
+});
+
+</script>
+
+</body>
+</html>
