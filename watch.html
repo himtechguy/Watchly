@@ -3,7 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Watchly — Watch</title>
+
+  <!-- Google Cast -->
+  <script
+    type="text/javascript"
+    src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1">
+  </script>
 
   <style>
     * {
@@ -14,58 +21,135 @@
 
     body {
       background: #050505;
-      color: white;
+      color: #fff;
       font-family: Arial, sans-serif;
     }
 
     header {
-      padding: 18px 22px;
+      height: 65px;
       background: #111;
+      display: flex;
+      align-items: center;
+      padding: 0 22px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
     .logo {
-      font-size: 25px;
-      font-weight: bold;
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: 1px;
     }
 
     .container {
-      max-width: 1000px;
+      width: 100%;
+      max-width: 1100px;
       margin: 30px auto;
       padding: 0 15px;
     }
 
     .player {
+      position: relative;
       width: 100%;
       background: #000;
-      border-radius: 10px;
+      border-radius: 12px;
       overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0,0,0,.5);
     }
 
     video {
       width: 100%;
-      display: block;
+      height: auto;
       min-height: 300px;
+      display: block;
+      background: #000;
     }
 
-    h1 {
-      margin-top: 25px;
-      font-size: 28px;
+    google-cast-launcher {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 38px;
+      height: 38px;
+      z-index: 20;
     }
 
-    p {
-      margin-top: 12px;
+    .info {
+      padding: 25px 5px;
+    }
+
+    .title {
+      font-size: 30px;
+      margin-bottom: 12px;
+    }
+
+    .description {
       color: #aaa;
       line-height: 1.6;
+      font-size: 15px;
     }
 
-    .back {
-      display: inline-block;
+    .buttons {
+      display: flex;
+      gap: 12px;
       margin-top: 25px;
-      color: white;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-block;
       text-decoration: none;
+      border: none;
       background: #e50914;
-      padding: 12px 20px;
-      border-radius: 5px;
+      color: white;
+      padding: 13px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .button.secondary {
+      background: #222;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: #666;
+      font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+
+      header {
+        height: 58px;
+      }
+
+      .logo {
+        font-size: 22px;
+      }
+
+      .container {
+        margin-top: 15px;
+      }
+
+      .player {
+        border-radius: 6px;
+      }
+
+      video {
+        min-height: 220px;
+      }
+
+      .title {
+        font-size: 24px;
+      }
+
+      google-cast-launcher {
+        top: 12px;
+        right: 12px;
+      }
     }
   </style>
 </head>
@@ -76,24 +160,66 @@
   <div class="logo">WATCHLY</div>
 </header>
 
-<div class="container">
+<main class="container">
 
   <div class="player">
-    <video controls>
-      <source src="" type="video/mp4">
-      Your browser does not support video playback.
+
+    <!-- Cast button -->
+    <google-cast-launcher></google-cast-launcher>
+
+    <!-- Movie player -->
+    <video
+      id="moviePlayer"
+      controls
+      playsinline
+      preload="metadata">
+
+      <!--
+        Replace this with a video URL that Watchly
+        is authorized to stream.
+      -->
+      <source
+        src=""
+        type="video/mp4">
+
+      Your browser does not support HTML5 video.
     </video>
+
   </div>
 
-  <h1>Movie Title</h1>
+  <div class="info">
 
-  <p>
-    Your movie description will appear here.
-  </p>
+    <h1 class="title">Movie Title</h1>
 
-  <a class="back" href="index.html">← Back to Watchly</a>
+    <p class="description">
+      Welcome to Watchly. Your movie description will appear here.
+      We're building a free streaming platform with support for
+      mobile devices and compatible TV casting devices.
+    </p>
 
-</div>
+    <div class="buttons">
+
+      <a
+        class="button secondary"
+        href="index.html">
+        ← Back
+      </a>
+
+      <button
+        class="button"
+        onclick="document.getElementById('moviePlayer').play()">
+        ▶ Play Movie
+      </button>
+
+    </div>
+
+  </div>
+
+</main>
+
+<footer>
+  © 2026 Watchly
+</footer>
 
 </body>
 </html>
