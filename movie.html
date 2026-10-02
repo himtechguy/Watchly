@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Watchly — Movie</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #050505;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      height: 65px;
+      background: #111;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 900;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    .back {
+      color: #aaa;
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 25px;
+    }
+
+    .back:hover {
+      color: white;
+    }
+
+    .poster {
+      width: 100%;
+      max-width: 350px;
+      height: 500px;
+      object-fit: cover;
+      border-radius: 10px;
+      background: #171717;
+    }
+
+    .placeholder {
+      width: 100%;
+      max-width: 350px;
+      height: 500px;
+      border-radius: 10px;
+      background: linear-gradient(145deg, #292929, #101010);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 80px;
+    }
+
+    h1 {
+      margin-top: 25px;
+      font-size: 35px;
+    }
+
+    .meta {
+      color: #aaa;
+      margin-top: 10px;
+    }
+
+    .description {
+      color: #ccc;
+      line-height: 1.7;
+      margin-top: 20px;
+      max-width: 700px;
+    }
+
+    .watch {
+      display: inline-block;
+      margin-top: 25px;
+      background: #e50914;
+      color: white;
+      text-decoration: none;
+      padding: 14px 25px;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">WATCHLY</div>
+</header>
+
+<main class="container">
+
+  <a href="movies.html" class="back">
+    ← Back to Movies
+  </a>
+
+  <div id="movie"></div>
+
+</main>
+
+<script src="movie-data.js"></script>
+
+<script>
+
+  const params =
+    new URLSearchParams(window.location.search);
+
+  const movieId =
+    params.get("id");
+
+  const movie =
+    movies.find(item => item.id === movieId);
+
+  const container =
+    document.getElementById("movie");
+
+
+  if (!movie) {
+
+    container.innerHTML = `
+      <h1>Movie not found</h1>
+      <p class="description">
+        We couldn't find this movie.
+      </p>
+    `;
+
+  } else {
+
+    let posterHTML;
+
+    if (movie.poster) {
+
+      posterHTML = `
+        <img
+          class="poster"
+          src="${movie.poster}"
+          alt="${movie.title}">
+      `;
+
+    } else {
+
+      posterHTML = `
+        <div class="placeholder">
+          🎬
+        </div>
+      `;
+
+    }
+
+
+    container.innerHTML = `
+
+      ${posterHTML}
+
+      <h1>${movie.title}</h1>
+
+      <div class="meta">
+        ${movie.genre} • ${movie.year}
+      </div>
+
+      <p class="description">
+        ${movie.description}
+      </p>
+
+      <a
+        class="watch"
+        href="watch.html?id=${encodeURIComponent(movie.id)}">
+
+        ▶ Watch Now
+
+      </a>
+
+    `;
+
+  }
+
+</script>
+
+</body>
+</html>
